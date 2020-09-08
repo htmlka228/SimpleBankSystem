@@ -1,0 +1,25 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/css/loginStyle.css}">
+</head>
+<body>
+<div id="container">
+    <div id="loginFormWrapper">
+        <form th:action="@{/registration}" th:object="${registrationForm}" th:method="post" class="loginForm">
+            <h1>Registration</h1>
+            <input type="text" name="username" placeholder="Enter login" th:field="*{login}"/>
+            <input type="password" name="password" placeholder="Enter password" th:field="*{password}"/>
+            <input type="password" name="password" placeholder="Confirm password" th:field="*{passwordConfirm}"/>
+            <input type="email" name="email" placeholder="Enter email" th:field="*{email}"/>
+            <input type="submit" value="Registration"/>
+        </form>
+    </div>
+</div>
+</body>
+</html>

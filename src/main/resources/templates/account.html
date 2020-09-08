@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="../static/css/indexStyle.css" th:href="@{/css/indexStyle.css}" rel="stylesheet" />
+</head>
+<body>
+    <header>
+        <div id="headerImageWrapper">
+            <img th:src="@{/images/imageHeader.jpg}" alt="">
+        </div>
+        <div id="headerMenuWrapper">
+            <ul class="menu-main">
+                <li><a href="" class="current">Work</a></li>
+                <li><a href="">About</a></li>
+                <li><a href="">Blog</a></li>
+                <li><a href="">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <div id="contentWrapper">
+        <div id="leftBar">
+            <div class="widget">
+                <p class="usernameAuthorization widget-title" th:text="${username}"></p>
+                <ul class="widget-list">
+                    <li><a href="">Личный кабинет</a></li>
+                    <li><a th:href="@{/logout}">Выйти</a></li>
+                </ul>
+                <h3 class="widget-title">Меню</h3>
+                <ul class="widget-list">
+                    <li><a th:href="@{/createAccount}">Создать счёт</a></li>
+                    <li><a th:href="@{/main}">Просмотреть счета</a></li>
+                </ul>
+            </div>
+        </div>
+        <div id="content">
+            <div class="account-info" th:object="${account}">
+                <img th:src="@{/images/accountImage.jpg}" alt="">
+                <div class="account-text" >
+                    <p class="number-account" th:text="'№ ' + ${account.getNumber()}">88005553535</p>
+                    <p class="account-money" th:text="${account.getBalance() + ' ' + account.getCurrency()}">7777777</p>
+
+                    <form th:method="post" th:action="@{'/account/' + ${account.getId()} + '/transfer'}" class="account-money">
+                        <select name="number">
+                            <option th:each="account : ${accounts}" th:text="${account.getNumber()}"></option>
+                        </select>
+                        <input type="number" name="money" placeholder="count money" />
+                        <button type="submit">Перевести</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
