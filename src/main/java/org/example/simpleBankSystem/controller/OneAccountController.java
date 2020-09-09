@@ -41,7 +41,44 @@ public class OneAccountController {
 
     @PostMapping("/account/{id}/transfer")
     public String transfer(@PathVariable Integer id, @RequestParam String number, @RequestParam Integer money){
-        accountService.updateAccount(Integer.parseInt(number), Double.valueOf(money));
+        Account account = accountService.getAccountById(id);
+        Account account1 = accountService.getAccountByNumber(Integer.parseInt(number));
+        if(account.getCurrency().equals("RU")){
+            if(account1.getCurrency().equals("USD")){
+                accountService.updateAccount(Integer.parseInt(number), Math.ceil(Double.valueOf(money) / 70 * 100) / 100);
+            }
+            else if(account1.getCurrency().equals("EUR")){
+                accountService.updateAccount(Integer.parseInt(number), Math.ceil(Double.valueOf(money) / 90 * 100) / 100);
+            }
+            else{
+                accountService.updateAccount(Integer.parseInt(number), Double.valueOf(money));
+            }
+        }
+
+        else if(account.getCurrency().equals("USD")){
+            if(account1.getCurrency().equals("RU")){
+                accountService.updateAccount(Integer.parseInt(number), Math.ceil(Double.valueOf(money) * 70 * 100) / 100);
+            }
+            else if(account1.getCurrency().equals("EUR")){
+                accountService.updateAccount(Integer.parseInt(number), Math.ceil(Double.valueOf(money) / 9 * 7 * 100) / 100);
+            }
+            else{
+                accountService.updateAccount(Integer.parseInt(number), Double.valueOf(money));
+            }
+        }
+
+        else{
+            if(account1.getCurrency().equals("USD")){
+                accountService.updateAccount(Integer.parseInt(number), Math.ceil(Double.valueOf(money) / 7 * 9 * 100) / 100);
+            }
+            else if(account1.getCurrency().equals("RU")){
+                accountService.updateAccount(Integer.parseInt(number), Math.ceil(Double.valueOf(money) * 90 * 100) / 100);
+            }
+            else{
+                accountService.updateAccount(Integer.parseInt(number), Double.valueOf(money));
+            }
+        }
+
         accountService.updateAccount(accountService.getAccountById(id).getNumber(), (double) (money * -1));
         return "redirect:/main";
     }
