@@ -46,4 +46,10 @@ public class OneAccountController {
         return "redirect:/main";
     }
 
+    @PostMapping("/account/{id}/currencyChange")
+    public String transfer(@PathVariable Integer id, @RequestParam String currency){
+        accountService.updateAccount(id, currency);
+        return "redirect:/main";
+    }
+
 }

@@ -53,6 +53,16 @@
                         <button type="submit">Перевести</button>
                     </form>
 
+                    <p>Изменение валюты счёта</p>
+                    <form th:method="post" th:action="@{'/account/' + ${account.getId()} + '/currencyChange'}" class="account-money">
+                        <select name="currency">
+                            <option>RU</option>
+                            <option>USD</option>
+                            <option>EUR</option>
+                        </select>
+                        <button type="submit">Перевести</button>
+                    </form>
+
                 </div>
             </div>
         </div>

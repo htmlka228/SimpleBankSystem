@@ -53,4 +53,46 @@ public class AccountServiceImpl implements AccountService {
         account.setBalance(account.getBalance() + balance);
         accountRepository.save(account);
     }
+
+    @Override
+    public void updateAccount(Integer id, String currency) {
+        Account account = accountRepository.findById(id);
+        if(currency.equals("RU")){
+            if(account.getCurrency().equals("USD")){
+                account.setBalance(Math.ceil(account.getBalance() * 70 * 100) / 100);
+                account.setCurrency("RU");
+                accountRepository.save(account);
+            }
+            else if(account.getCurrency().equals("EUR")){
+                account.setBalance(Math.ceil(account.getBalance() * 90 * 100) / 100);
+                account.setCurrency("RU");
+                accountRepository.save(account);
+            }
+        }
+        else if(currency.equals("USD")){
+            if(account.getCurrency().equals("RU")){
+                account.setBalance(Math.ceil(account.getBalance() / 70 * 100) / 100);
+                account.setCurrency("USD");
+                accountRepository.save(account);
+            }
+            else if(account.getCurrency().equals("EUR")){
+                account.setBalance(Math.ceil(account.getBalance() * 9 / 7 * 100) / 100);
+                account.setCurrency("USD");
+                accountRepository.save(account);
+            }
+        }
+        else{
+            if(account.getCurrency().equals("USD")){
+                account.setBalance(Math.ceil(account.getBalance() * 7 / 9 * 100) / 100);
+                account.setCurrency("EUR");
+                accountRepository.save(account);
+            }
+            else if(account.getCurrency().equals("RU")){
+                account.setBalance(Math.ceil(account.getBalance() / 90 * 100) / 100);
+                account.setCurrency("EUR");
+                accountRepository.save(account);
+            }
+        }
+
+    }
 }

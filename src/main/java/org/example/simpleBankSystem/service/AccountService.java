@@ -13,6 +13,7 @@ public interface AccountService {
     public Account getAccountById(int id);
     public Account getAccountByNumber(Integer number);
     public void updateAccount(Integer number, Double balance);
+    public void updateAccount(Integer id, String currency);
     public void deleteAllAccounts();
     public List<Account> getAccountsByUser(User user);
 }
