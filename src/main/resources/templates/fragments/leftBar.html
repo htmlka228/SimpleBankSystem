@@ -6,7 +6,7 @@
                 <p class="usernameAuthorization widget-title" th:text="${username}"></p>
                 <ul class="widget-list">
                     <li><a href="">Личный кабинет</a></li>
-                    <li><a th:href="@{/logout}">Выйти</a></li>
+                    <li><form th:action="@{/logout}" th:method="post"><input type="submit" value="Выйти"></form></li>
                 </ul>
 
                 <h3 class="widget-title">Меню</h3>
