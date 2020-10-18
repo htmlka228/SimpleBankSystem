@@ -33,9 +33,9 @@ public class User implements UserDetails, Serializable {
     private boolean enabled = true;
 
     @Enumerated(EnumType.STRING)
-    @CollectionTable(name = "roles")
+    @CollectionTable(name = "roles", joinColumns = @JoinColumn(name = "user_id"))
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
-    Set<Role> roles;
+    private Set<Role> roles;
 
     public User() {
     }
