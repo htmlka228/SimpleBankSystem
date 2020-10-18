@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <body>
+        <div id="leftBar" th:fragment="leftBar">
+            <div class="widget">
+                <p class="usernameAuthorization widget-title" th:text="${username}"></p>
+                <ul class="widget-list">
+                    <li><a href="">Личный кабинет</a></li>
+                    <li><a th:href="@{/logout}">Выйти</a></li>
+                </ul>
+
+                <h3 class="widget-title">Меню</h3>
+                <ul class="widget-list">
+                    <li><a th:href="@{/createAccount}">Создать счёт</a></li>
+                    <li><a th:href="@{/main}">Просмотреть счета</a></li>
+                </ul>
+            </div>
+        </div>
+</body>
+</html>

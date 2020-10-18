@@ -9,35 +9,12 @@
     <link href="../static/css/indexStyle.css" th:href="@{/css/indexStyle.css}" rel="stylesheet" />
 </head>
 <body>
-    <header>
-        <div id="headerImageWrapper">
-            <img th:src="@{/images/imageHeader.jpg}" alt="">
-        </div>
-        <div id="headerMenuWrapper">
-            <ul class="menu-main">
-                <li><a href="" class="current">Work</a></li>
-                <li><a href="">About</a></li>
-                <li><a href="">Blog</a></li>
-                <li><a href="">Contact</a></li>
-            </ul>
-        </div>
-    </header>
+    <header th:replace="~{fragments/header :: header}"></header>
 
     <div id="contentWrapper">
-        <div id="leftBar">
-            <div class="widget">
-                <p class="usernameAuthorization widget-title" th:text="${username}"></p>
-                <ul class="widget-list">
-                    <li><a href="">Личный кабинет</a></li>
-                    <li><form th:action="@{/logout}" th:method="post"><input type="submit" value="Выйти"></form></li>
-                </ul>
-                <h3 class="widget-title">Меню</h3>
-                <ul class="widget-list">
-                    <li><a th:href="@{/createAccount}">Создать счёт</a></li>
-                    <li><a th:href="@{/main}">Просмотреть счета</a></li>
-                </ul>
-            </div>
-        </div>
+
+        <div id="leftBar" th:replace="~{fragments/leftBar :: leftBar}"></div>
+
         <div id="content">
             <div class="account-info" th:each="account : ${accounts}">
                 <img th:src="@{/images/accountImage.jpg}" alt="">
