@@ -62,9 +62,8 @@ html, body{
     overflow: hidden;
 }
 
-.account-info{
-    height: 700px;
-    display: flex;
+.account-info-col{
+    padding-top: 120px;
 }
 
 .account-text{

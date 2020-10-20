@@ -26,20 +26,20 @@
                             <div class="col-5">
                                 <img th:src="@{/images/accountImage.jpg}" alt="">
                             </div>
-                            <div class="col=7" >
+                            <div class="col-7 account-info-col" >
                                 <div class="row">
                                     <div class="col">
-                                        <h1 th:text="'№ ' + ${account.getNumber()}">88005553535</h1>
+                                        <h1 class="text-center" th:text="'№ ' + ${account.getNumber()}">88005553535</h1>
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row pt-5">
                                     <div class="col">
-                                        <h2 th:text="${account.getBalance() + ' ' + account.getCurrency()}">7777777</p>
+                                        <h2 class="text-center" th:text="${account.getBalance() + ' ' + account.getCurrency()}">7777777</h2>
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row pt-5">
                                     <div class="col">
-                                        <form th:method="post" th:action="@{'/account/' + ${account.getId()} + '/transfer'}" class="account-money">
+                                        <form class="text-center" th:method="post" th:action="@{'/account/' + ${account.getId()} + '/transfer'}">
                                             <select name="number">
                                                 <option th:each="account : ${accounts}" th:text="${account.getNumber()}"></option>
                                             </select>
@@ -48,12 +48,12 @@
                                         </form>
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row pt-5 align-items-center">
                                     <div class="col">
                                         <h2>Изменение валюты счёта</h2>
                                     </div>
                                     <div class="col">
-                                        <form th:method="post" th:action="@{'/account/' + ${account.getId()} + '/currencyChange'}" class="account-money">
+                                        <form th:method="post" th:action="@{'/account/' + ${account.getId()} + '/currencyChange'}">
                                             <select name="currency">
                                                 <option>RU</option>
                                                 <option>USD</option>
