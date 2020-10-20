@@ -1,58 +1,77 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
 
-    <!-- bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <!-- bootstrap -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
-    <link href="../static/css/indexStyle.css" th:href="@{/css/indexStyle.css}" rel="stylesheet" />
-</head>
-<body>
-    <header th:replace="~{fragments/header :: header}"></header>
+        <link href="../static/css/indexStyle.css" th:href="@{/css/indexStyle.css}" rel="stylesheet" />
+    </head>
+    <body>
+        <div class="content">
+            <header th:replace="~{fragments/header :: header}"></header>
 
-    <div id="contentWrapper">
-
-        <div id="leftBar" th:replace="~{fragments/leftBar :: leftBar}"></div>
-
-        <div id="content">
-            <div class="account-info" th:object="${account}">
-                <img th:src="@{/images/accountImage.jpg}" alt="">
-                <div class="account-text" >
-                    <p class="number-account" th:text="'№ ' + ${account.getNumber()}">88005553535</p>
-                    <p class="account-money" th:text="${account.getBalance() + ' ' + account.getCurrency()}">7777777</p>
-
-                    <form th:method="post" th:action="@{'/account/' + ${account.getId()} + '/transfer'}" class="account-money">
-                        <select name="number">
-                            <option th:each="account : ${accounts}" th:text="${account.getNumber()}"></option>
-                        </select>
-                        <input type="number" name="money" placeholder="count money" />
-                        <button type="submit">Перевести</button>
-                    </form>
-
-                    <p>Изменение валюты счёта</p>
-                    <form th:method="post" th:action="@{'/account/' + ${account.getId()} + '/currencyChange'}" class="account-money">
-                        <select name="currency">
-                            <option>RU</option>
-                            <option>USD</option>
-                            <option>EUR</option>
-                        </select>
-                        <button type="submit">Перевести</button>
-                    </form>
+            <div id="contentWrapper" class="mt-2">
+                <div class="row mr-0">
+                    <div class="col-2 pr-0">
+                        <div id="leftBar" th:replace="~{fragments/leftBar :: leftBar}"></div>
+                    </div>
+                    <div class="col-10">
+                        <div class="row pt-3" th:object="${account}">
+                            <div class="col-5">
+                                <img th:src="@{/images/accountImage.jpg}" alt="">
+                            </div>
+                            <div class="col=7" >
+                                <div class="row">
+                                    <div class="col">
+                                        <h1 th:text="'№ ' + ${account.getNumber()}">88005553535</h1>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <h2 th:text="${account.getBalance() + ' ' + account.getCurrency()}">7777777</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <form th:method="post" th:action="@{'/account/' + ${account.getId()} + '/transfer'}" class="account-money">
+                                            <select name="number">
+                                                <option th:each="account : ${accounts}" th:text="${account.getNumber()}"></option>
+                                            </select>
+                                            <input type="number" name="money" placeholder="count money" />
+                                            <button type="submit">Перевести</button>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <h2>Изменение валюты счёта</h2>
+                                    </div>
+                                    <div class="col">
+                                        <form th:method="post" th:action="@{'/account/' + ${account.getId()} + '/currencyChange'}" class="account-money">
+                                            <select name="currency">
+                                                <option>RU</option>
+                                                <option>USD</option>
+                                                <option>EUR</option>
+                                            </select>
+                                            <button type="submit">Перевести</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-
-
-
-    <!-- Bootstrap scripts -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-</body>
+            <!-- Bootstrap scripts -->
+            <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    </body>
 </html>
