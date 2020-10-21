@@ -56,6 +56,8 @@ public class UserServiceImpl implements UserService{
             return false;
         }
         user.setActivationCode(null);
+        user.setEnabled(true);
+        userRepository.save(user);
         return true;
     }
 

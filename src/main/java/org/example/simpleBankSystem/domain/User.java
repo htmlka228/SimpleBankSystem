@@ -28,7 +28,7 @@ public class User implements UserDetails{
     private String email;
 
     @Column(name = "enabled")
-    private boolean enabled = true;
+    private boolean enabled = false;
 
     @Column(name = "activationCode")
     private String activationCode;
