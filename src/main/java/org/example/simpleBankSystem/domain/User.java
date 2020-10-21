@@ -12,9 +12,7 @@ import java.util.Set;
 @Entity
 @Table(name = "users")
 //@Transactional
-public class User implements UserDetails, Serializable {
-
-    private static final long serialVersionUID = -630962474388642916L;
+public class User implements UserDetails{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,6 +29,9 @@ public class User implements UserDetails, Serializable {
 
     @Column(name = "enabled")
     private boolean enabled = true;
+
+    @Column(name = "activationCode")
+    private String activationCode;
 
     @Enumerated(EnumType.STRING)
     @CollectionTable(name = "roles", joinColumns = @JoinColumn(name = "user_id"))
@@ -96,7 +97,15 @@ public class User implements UserDetails, Serializable {
         this.roles = roles;
     }
 
-   @Override
+    public String getActivationCode() {
+        return activationCode;
+    }
+
+    public void setActivationCode(String activationCode) {
+        this.activationCode = activationCode;
+    }
+
+    @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return getRoles();
     }

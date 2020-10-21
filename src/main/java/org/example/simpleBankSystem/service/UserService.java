@@ -7,4 +7,6 @@ public interface UserService extends UserDetailsService{
     public void addUser(User user);
     void updateUser(User user);
     User getUserByLogin(String login);
+    User getUserByActivationCode(String code);
+    boolean activateUser(String code);
 }

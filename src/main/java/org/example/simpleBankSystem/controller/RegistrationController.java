@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
@@ -31,5 +32,17 @@ public class RegistrationController {
     public String registrationPost(@Valid @ModelAttribute("registrationForm") RegistrationForm registrationForm){
         userService.addUser(registrationForm.createUser(passwordEncoder));
         return "redirect:/main";
+    }
+
+    @GetMapping("/activate/{code}")
+    public String activate(@PathVariable String code, Model model){
+        boolean isActivated = userService.activateUser(code);
+        if(isActivated){
+            model.addAttribute("activationResult", "Activation code is success");
+        }
+        else{
+            model.addAttribute("activationResult", "Activation code is not found");
+        }
+        return "activation";
     }
 }
